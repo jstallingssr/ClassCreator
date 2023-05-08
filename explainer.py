@@ -10,7 +10,7 @@ def send_question(question: str) -> dict:
     return openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "You are a software developer. You are fluent in nearly every known programming language."},
+            {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": question},
         ],
     )
@@ -27,10 +27,10 @@ def get_code_info(question: str, code: str) -> str:
 
 retrieve_code_language = partial(
     get_code_info,
-    question="Can you explain to me in what language this code is written?",
+    question="How many letters?",
 )
 
 retrieve_code_explanation = partial(
     get_code_info,
-    question="Can you explain to me what this code base does in a few words?",
+    question="How many words",
 )

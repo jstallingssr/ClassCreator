@@ -7,19 +7,24 @@ from explainer import retrieve_code_explanation, retrieve_code_language
 
 def display_header() -> None:
     st.image("img/logo.jpg")
-    st.title("Welcome to AI-rjan Code Explainer")
+    st.title("Welcome to the Jungle")
     st.text("Just upload your code or copy and paste in the field below")
     st.warning("Warning: uploaded files have precendence on copied and pasted code.")
 
 
 def display_widgets() -> tuple[UploadedFile, str]:
     file = st.file_uploader("Upload your script here.")
-    text = st.text_area("or copy and paste your code here (press Ctrl + Enter to send)")
+    text = st.text_area("or copy and paste your code here")
 
     if not (text or file):
         st.error("Bring your code with one of the options from above.")
 
-    return file, text
+    submitted = st.button("Submit")  # Add a button to submit the code
+
+    if submitted:
+        return file, text  # Return the file and text when the button is clicked
+    else:
+        return None, None  # Return None when the button is not clicked
 
 
 def retrieve_content_from_file(file: UploadedFile) -> str:
