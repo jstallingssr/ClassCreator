@@ -3,14 +3,14 @@ from functools import partial
 
 import openai
 
-openai.api_key = os.getenv("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")
-
+# openai.api_key = os.getenv("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")
+openai.api_key = "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"
 
 def send_question(question: str) -> dict:
     return openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
-            {"role": "system", "content": "You are a developer."},
+            {"role": "system", "content": "You are a software developer. You are fluent in nearly every known programming language."},
             {"role": "user", "content": question},
         ],
     )

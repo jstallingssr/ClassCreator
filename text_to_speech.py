@@ -5,9 +5,9 @@ from typing import BinaryIO
 import requests
 from requests import Response
 
-API_KEY = os.getenv("aeed0c99f1c6dc558890ea34857b9533")
+# API_KEY = os.getenv("aeed0c99f1c6dc558890ea34857b9533")
 BASE_URL = "https://api.elevenlabs.io"
-
+API_KEY = "aeed0c99f1c6dc558890ea34857b9533"
 
 def _get_id_from_name(response: Response, name: str) -> str:
     id_to_name = {
