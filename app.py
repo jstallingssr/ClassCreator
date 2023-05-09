@@ -45,22 +45,11 @@ def display_widgets():
         return class_outline, submitted
 
     return None, False
-def choose_voice():
-    voices = tts.list_available_names()
-    return st.selectbox(
-        "Select voice", 
-        voices,
-    )
+
 def main() -> None:
     display_header()
     class_outline, submitted = display_widgets()
     if submitted:
-        # Removed the unnecessary 'retrieve_code_language' call and updated variable names
-        selected_voice = choose_voice()
-        tts.convert_text_to_mp3(
-            message=class_outline, voice_name=selected_voice, mp3_filename="class_outline.mp3"
-        )
-
         st.markdown(f"**App:** {app}")
         st.markdown(f"**Difficulty:** {difficulty}")
 
