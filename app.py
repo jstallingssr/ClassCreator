@@ -30,7 +30,7 @@ def get_cached_code_info(app: str, difficulty: str) -> str:
     return retrieve_ai_answer(get_code_info(app=app, difficulty=difficulty))
 
 def display_header() -> None:
-    st.image("img/logo.png")
+    st.image("img/logo.jpg")
 
 def display_widgets() -> tuple:
     response = st.empty()
