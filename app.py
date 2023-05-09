@@ -35,11 +35,11 @@ def display_header() -> None:
 def display_widgets() -> tuple:
     response = st.empty()
     options = ['Blender', 'Unreal Engine', 'Roblox', 'BandLab', 'Unity', 'Construct 3', 'Minecraft', 'Krita']
-    selected_option = st.selectbox('Select an option:', options)
+    selected_option = st.selectbox('First, choose a software application from the list below:', options)
     app = selected_option
 
     difficulty = st.select_slider(
-        'Select level of difficulty',
+        'Next, select the level of difficulty for this class:',
         options=['Beginner', 'Intermediate', 'Advanced', 'Expert']
     )
 
@@ -56,9 +56,7 @@ def main() -> None:
     if class_outline:
         st.markdown(f"**App:** {app}")
         st.markdown(f"**Difficulty:** {difficulty}")
-
         st.markdown(f"**Class Outline:**\n{class_outline}")
-        st.audio("class_outline.mp3")
 
 if __name__ == "__main__":
     main()
