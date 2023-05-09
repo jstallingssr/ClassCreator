@@ -33,6 +33,7 @@ def display_header() -> None:
     st.image("img/logo.png")
 
 def display_widgets() -> tuple:
+    st.header = "Header"
     response = st.empty()
     options = ['Blender', 'Unreal Engine', 'Roblox', 'BandLab', 'Unity', 'Construct 3', 'Minecraft', 'Krita']
     selected_option = st.selectbox('First, choose a software application from the list below:', options)
