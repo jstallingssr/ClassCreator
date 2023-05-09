@@ -1,5 +1,4 @@
 import openai
-import time
 import streamlit as st
 import text_to_speech as tts
 from functools import partial
@@ -27,17 +26,16 @@ def get_code_info(app: str, difficulty: str) -> str:
 
 def display_header() -> None:
     st.image("img/logo.jpg")
-    st.title("Welcome to the Jungle")
 def display_widgets():
     response = st.empty()  # Add an empty element to hold the OpenAI API response
-    options = ['Blender', 'Unreal Engine', 'Roblox', 'Garrys Mod', 'Unity', 'Construct 3', 'Minecraft', 'Krita']
+    options = ['Blender', 'Unreal Engine', 'Roblox', 'BandLab', 'Unity', 'Construct 3', 'Minecraft', 'Krita']
     selected_option = st.selectbox('Select an option:', options)
     submitted = st.button("Generate a Class!")  # Add a button to submit the code
     app = selected_option
 
     difficulty = st.select_slider(
         'Select level of difficulty',
-        options=['Beginner', 'Intermediate', 'Expert']
+        options=['Beginner', 'Intermediate', 'Advanced', 'Expert']
     )
     if submitted:  # If the button is clicked, update the OpenAI API response
         class_outline = get_code_info(app=app, difficulty=difficulty)
