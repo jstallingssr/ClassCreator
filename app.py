@@ -1,7 +1,6 @@
-import os
 from typing import NamedTuple
 from functools import partial
-
+import os
 import openai
 import streamlit as st
 import text_to_speech as tts
@@ -33,12 +32,12 @@ def display_header() -> None:
     st.image("img/logo.png")
 
 def display_widgets() -> tuple:
-    st.header('This is a header')
+    st.subheader('First, choose a software application from the list below:')
     response = st.empty()
     options = ['Blender', 'Unreal Engine', 'Roblox', 'BandLab', 'Unity', 'Construct 3', 'Minecraft', 'Krita']
-    selected_option = st.selectbox('First, choose a software application from the list below:', options)
+    selected_option = st.selectbox('Select:', options)
     app = selected_option
-
+    st.subheader('Next, select the level of difficulty for this class')
     difficulty = st.select_slider(
         'Next, select the level of difficulty for this class:',
         options=['Beginner', 'Intermediate', 'Advanced', 'Expert']
