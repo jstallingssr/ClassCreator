@@ -1,87 +1,71 @@
+import openai
+import time
 import streamlit as st
-from streamlit.runtime.uploaded_file_manager import UploadedFile
-
 import text_to_speech as tts
-from explainer import retrieve_code_explanation, retrieve_code_language
+from functools import partial
 
+openai.api_key = "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"
+
+def send_app(question: str, app: str, difficulty: str) -> dict:
+    return openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+            {"role": "system", "content": "You are a teacher and a course designer."},
+            {"role": "user", "content": f"App: {app}, Difficulty: {difficulty}"},
+            {"role": "user", "content": question},
+        ],
+        max_tokens=512,
+    )
+
+def retrieve_ai_answer(response: dict) -> str:
+    return response['choices'][0]['message']['content']
+
+def get_code_info(app: str, difficulty: str) -> str:
+    question = f"Create a one-hour class outline for a key feature in {app} at the {difficulty} level. This should be a very specific feature in the software, not a general overview. Please provide only one class outline with a catchy title shown at the top. The outline should be formatted in markdown, outline format. The outline should be very detailed. Each class should include three to five specific items that the student will create during class (a game feature, an art asset, a texture, etc.). Lastly, do not repeat any suggested classes during a user's session. "
+    resp = send_app(question=question, app=app, difficulty=difficulty)
+    return retrieve_ai_answer(resp)
 
 def display_header() -> None:
     st.image("img/logo.jpg")
     st.title("Welcome to the Jungle")
-    st.text("Just upload your code or copy and paste in the field below")
-    st.warning("Warning: uploaded files have precendence on copied and pasted code.")
+def display_widgets():
+    response = st.empty()  # Add an empty element to hold the OpenAI API response
+    options = ['Blender', 'Unreal Engine', 'Roblox', 'Garrys Mod', 'Unity', 'Construct 3', 'Minecraft', 'Krita']
+    selected_option = st.selectbox('Select an option:', options)
+    submitted = st.button("Generate a Class!")  # Add a button to submit the code
+    app = selected_option
 
+    difficulty = st.select_slider(
+        'Select level of difficulty',
+        options=['Beginner', 'Intermediate', 'Expert']
+    )
+    if submitted:  # If the button is clicked, update the OpenAI API response
+        class_outline = get_code_info(app=app, difficulty=difficulty)
+        response.markdown(f"**Class Outline:**\n{class_outline}")  # Update the response element
+        return class_outline, submitted
 
-def display_widgets() -> tuple[UploadedFile, str]:
-    file = st.file_uploader("Upload your script here.")
-    text = st.text_area("or copy and paste your code here")
-
-    if not (text or file):
-        st.error("Bring your code with one of the options from above.")
-
-    submitted = st.button("Submit")  # Add a button to submit the code
-
-    if submitted:
-        return file, text  # Return the file and text when the button is clicked
-    else:
-        return None, None  # Return None when the button is not clicked
-
-
-def retrieve_content_from_file(file: UploadedFile) -> str:
-    return file.getvalue().decode("utf8")
-
-
-def extract_code() -> str:
-    uploaded_script, pasted_code = display_widgets()
-
-    if uploaded_script:
-        return retrieve_content_from_file(uploaded_script)
-    return pasted_code or ""
-
-
+    return None, False
 def choose_voice():
     voices = tts.list_available_names()
     return st.selectbox(
-        "Could you please choose one of our available voices to explain?",
+        "Select voice", 
         voices,
     )
-
-
 def main() -> None:
     display_header()
+    class_outline, submitted = display_widgets()
+    if submitted:
+        # Removed the unnecessary 'retrieve_code_language' call and updated variable names
+        selected_voice = choose_voice()
+        tts.convert_text_to_mp3(
+            message=class_outline, voice_name=selected_voice, mp3_filename="class_outline.mp3"
+        )
 
-    selected_voice = choose_voice()
+        st.markdown(f"**App:** {app}")
+        st.markdown(f"**Difficulty:** {difficulty}")
 
-    if code_to_explain := extract_code():
-        with st.spinner(text="Let me think for a while..."):
-            language = retrieve_code_language(code=code_to_explain)
-            explanation = retrieve_code_explanation(code=code_to_explain)
-
-        with st.spinner(text="Give me a little bit more time, this code is complex..."):
-            tts.convert_text_to_mp3(
-                message=language, voice_name=selected_voice, mp3_filename="language.mp3"
-            )
-        with st.spinner(
-            text=(
-                "I've got the language! "
-                "I'm thinking about how to explain to you in a few words now..."
-            )
-        ):
-            tts.convert_text_to_mp3(
-                message=explanation,
-                voice_name=selected_voice,
-                mp3_filename="explanation.mp3",
-            )
-
-        st.success("Uhg, that was hard! But here is your explanation")
-        st.warning("Remember to turn on your audio!")
-
-        st.markdown(f"**Language:** {language}")
-        st.audio("language.mp3")
-
-        st.markdown(f"**Explanation:** {explanation}")
-        st.audio("explanation.mp3")
-
+        st.markdown(f"**Class Outline:**\n{class_outline}")
+        st.audio("class_outline.mp3")
 
 if __name__ == "__main__":
     main()
