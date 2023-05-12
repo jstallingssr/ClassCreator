@@ -6,7 +6,7 @@ import streamlit as st
 from time import time
 
 
-openai.api_key = "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"
+openai.api_key = "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"
 
 
 class ChatResponse(NamedTuple):
