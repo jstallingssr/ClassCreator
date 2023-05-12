@@ -65,6 +65,7 @@ def display_widgets() -> tuple:
     options = [
         "Blender",
         "Unreal Engine",
+        "Microsoft Excel",
         "Roblox",
         "BandLab",
         "Unity",
