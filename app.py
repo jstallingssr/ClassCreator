@@ -27,7 +27,7 @@ def send_app(app: str, difficulty: str) -> ChatResponse:
         f"Do not repeat any suggested classes during a user's session."
         f"Each outline should also have an additional resource section at the bottom with relevant links"
         f"When providing additional resources, please only use OFFICIAL resources such as https://docs.blender.org/ "
-        f"https://docs.unrealengine.com/ do not link to videos "
+        f"https://docs.unrealengine.com/ do not link to videos or fan sites"
         f"No mention should be made of time, how long to complete, etc."
     )
 
