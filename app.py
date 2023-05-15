@@ -5,7 +5,7 @@ import streamlit as st
 from time import time
 import os
 
-api_key = os.environ['API_KEY']
+openai.api_key = os.getenv('API_KEY')
 
 class ChatResponse(NamedTuple):
     content: str
