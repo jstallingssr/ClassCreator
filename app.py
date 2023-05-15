@@ -86,7 +86,8 @@ def display_header(app: str) -> None:
         "Unreal Engine": "img/unreal.png",
         "Roblox": "img/roblox.png",
         "Godot": "img/godot.png",
-        "Microsoft Excel": "img/excel.png"
+        "Microsoft Excel": "img/excel.png",
+        "Ableton Live": "img/ableton.png"
         # ... add the rest of your mappings here
     }
 
