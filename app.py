@@ -8,7 +8,7 @@ import os
 st.set_page_config(
     page_title="Class Creator Thing-a-ma-jig!",
     page_icon="🧊",
-    layout="wide",
+    layout="centered",
     initial_sidebar_state="expanded",
     menu_items={
         'Get Help': 'https://www.extremelycoolapp.com/help',
