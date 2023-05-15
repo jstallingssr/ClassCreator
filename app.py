@@ -79,7 +79,7 @@ def display_header(app: str) -> None:
         st.write("")
 
     with col2:
-        st.image("img/logo.png"))
+        st.image("img/logo.png")
 
     with col3:
         st.write("")
