@@ -68,12 +68,30 @@ def get_cached_code_info(app: str, difficulty: str, unique_id: float) -> str:
     return get_code_info(app=app, difficulty=difficulty)
 
 
-#def display_header() -> None:
- #   st.image("img/logo.png")
-
 def display_header(app: str) -> None:
+    logo_dict = {
+        'Blender': 'img/blender.png',
+        'Unreal Engine': 'img/unreal.png',
+        'Roblox': 'img/roblox.png',
+        # ... add the rest of your mappings here
+    }
+
+    logo_file_path = logo_dict.get(app, 'img/logo.png')  # Use a default logo if the app is not found.
 
     col1, col2, col3 = st.beta_columns([1,6,1])
+
+    with col1:
+        st.write("")
+
+    with col2:
+        st.image(logo_file_path)
+
+    with col3:
+        st.write("")
+
+
+    def display_widgets() -> tuple:
+        col1, col2, col3 = st.beta_columns([1,6,1])
 
     with col1:
         st.write("")
@@ -85,103 +103,51 @@ def display_header(app: str) -> None:
         st.write("")
 
 
+st.markdown("The Class Creator Thing-a-ma-jig! is an innovative educational tool that leverages artificial intelligence to create lesson plans for a wide array of software applications. Choose from an expertly curated list of programs, including Blender, Unreal Engine, Unity, and more.")
 
-    # Define a dictionary mapping app names to logo file paths.
-        logo_dict = {
-        'Blender': 'img/blender.png',
-        'Unreal Engine': 'img/unreal.png',
-        'Roblox': 'img/roblox.png',
-        # ... add the rest of your mappings here
-    }
+f"Our application is designed with your schedule in mind. Each class can be comfortably completed within a 45-60 minute time frame, and the difficulty level can be customized to match your skill, ranging from Beginner to Expert."
 
-    # Use the selected app to get the correct logo file path.
-        logo_file_path = logo_dict.get(app, 'img/logo.png')  # Use a default logo if the app is not found.
+f"Create unique and comprehensive class outlines with just a few clicks using the Class Creator Thing-a-ma-jig!)"
 
-    # Display the logo.
+st.subheader("First, choose a software application from the list below:")
+response = st.empty()
+options = [
+    "Blender",
+    "Unreal Engine",
+    "Microsoft Excel",
+    "Roblox",
+    "Ableton Live",
+    "Godot",
+    "BandLab",
+    "Unity",
+    "Construct 3",
+    "Minecraft",
+    "Krita",
+]
+selected_option = st.selectbox("Select:", options)
+app = selected_option
 
-        col1, col2, col3 = st.beta_columns([1,6,1])
+display_header(app)
 
-    with col1:
-        st.write("")
+st.subheader("Next, select the level of difficulty for this class:")
+difficulty = st.select_slider(
+    "Select:", options=["Beginner", "Intermediate", "Advanced", "Expert"]
+)
 
-    with col2:
-        st.image(logo_file_path)
+class_outline = None  # Initialize class_outline with None
+unique_id = None  # Initialize unique_id with None
 
-    with col3:
-        st.write("")
-
-
-
-        st.image(logo_file_path)
-
-def display_widgets() -> tuple:
-
-
-    st.markdown("The Class Creator Thing-a-ma-jig! is an innovative educational tool that leverages artificial intelligence to create lesson plans for a wide array of software applications. Choose from an expertly curated list of programs, including Blender, Unreal Engine, Unity, and more.")
-
-    f"Our application is designed with your schedule in mind. Each class can be comfortably completed within a 45-60 minute time frame, and the difficulty level can be customized to match your skill, ranging from Beginner to Expert."
-
-    f"Create unique and comprehensive class outlines with just a few clicks using the Class Creator Thing-a-ma-jig!)"
-
-    st.subheader("First, choose a software application from the list below:")
-    response = st.empty()
-    options = [
-        "Blender",
-        "Unreal Engine",
-        "Microsoft Excel",
-        "Roblox",
-        "Ableton Live",
-        "Godot",
-        "BandLab",
-        "Unity",
-        "Construct 3",
-        "Minecraft",
-        "Krita",
-    ]
-    selected_option = st.selectbox("Select:", options)
-    app = selected_option
-
-
-    # Display the logo for the chosen app.
-    display_header(app)
-    st.subheader("Next, select the level of difficulty for this class:")
-    difficulty = st.select_slider(
-        "Select:", options=["Beginner", "Intermediate", "Advanced", "Expert"]
-    )
-
-    class_outline = None  # Initialize class_outline with None
-    unique_id = None  # Initialize unique_id with None
-
-    if st.button("Generate a Class!"):
-        unique_id = time()  # Generate a new unique identifier
-        with st.spinner(text="Creating class, hang tight!"):
-            class_outline = get_cached_code_info(
-                app=app, difficulty=difficulty, unique_id=unique_id
-            )
-            return class_outline, app, difficulty, True
-
-    return class_outline, app, difficulty, False
-
-    return None, None, None, False
-
+if st.button("Generate a Class!"):
+    unique_id = time()  # Generate a new unique identifier
+    with st.spinner(text="Creating class, hang tight!"):
+        class_outline = get_cached_code_info(
+            app=app, difficulty=difficulty, unique_id=unique_id
+        )
+        st.markdown(f"**Class Outline:**\n{class_outline}")
+        st.button("New Class")
 
 def main() -> None:
-    # display_header()  # <- remove this line
-    class_outline, app, difficulty, generate_class = display_widgets()
-    new_class_clicked = (
-        False  # Variable to track whether "New Class" button was clicked
-    )
-
-    if generate_class:
-        st.markdown(f"**Class Outline:**\n{class_outline}")
-        new_class_clicked = st.button("New Class")
-
-    if not generate_class or new_class_clicked:
-        # st.markdown(f"**App:** {app}")
-        #st.markdown(f"**Difficulty:** {difficulty}")
-
-        if new_class_clicked:
-            st.stop()
+    display_widgets()
 
 
 if __name__ == "__main__":
