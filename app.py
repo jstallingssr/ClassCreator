@@ -60,7 +60,6 @@ def display_header(app: str) -> None:
         "Roblox",
         "Godot",
         "Ableton Live",
-        "Godot",
         "BandLab",
         "Unity",
         "Construct 3",
