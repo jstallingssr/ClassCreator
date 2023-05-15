@@ -64,9 +64,23 @@ def get_cached_code_info(app: str, difficulty: str, unique_id: float) -> str:
     return get_code_info(app=app, difficulty=difficulty)
 
 
-def display_header() -> None:
-    st.image("img/logo.png")
+#def display_header() -> None:
+ #   st.image("img/logo.png")
 
+def display_header(app: str) -> None:
+    # Define a dictionary mapping app names to logo file paths.
+        logo_dict = {
+        'Blender': 'img/blender.png',
+        'Unreal Engine': 'img/unreal.png',
+        'Roblox': 'img/roblox.png',
+        # ... add the rest of your mappings here
+    }
+
+    # Use the selected app to get the correct logo file path.
+        logo_file_path = logo_dict.get(app, 'img/logo.png')  # Use a default logo if the app is not found.
+
+    # Display the logo.
+        st.image(logo_file_path)
 
 def display_widgets() -> tuple:
     st.subheader("First, choose a software application from the list below:")
@@ -86,6 +100,10 @@ def display_widgets() -> tuple:
     ]
     selected_option = st.selectbox("Select:", options)
     app = selected_option
+
+
+    # Display the logo for the chosen app.
+    display_header(app)
     st.subheader("Next, select the level of difficulty for this class:")
     difficulty = st.select_slider(
         "Select:", options=["Beginner", "Intermediate", "Advanced", "Expert"]
