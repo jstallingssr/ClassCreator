@@ -18,6 +18,10 @@ st.set_page_config(
 )
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
+with open("style.css") as f:
+    st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
+
+
 class ChatResponse(NamedTuple):
     content: str
 
