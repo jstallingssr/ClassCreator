@@ -3,9 +3,9 @@ from functools import partial
 import openai
 import streamlit as st
 from time import time
-from keys import API_KEY
+import os
 
-openai.api_key = API_KEY
+api_key = os.environ['API_KEY']
 
 class ChatResponse(NamedTuple):
     content: str
@@ -65,6 +65,8 @@ def display_widgets() -> tuple:
         "Unreal Engine",
         "Microsoft Excel",
         "Roblox",
+        "Ableton Live",
+        "Godot",
         "BandLab",
         "Unity",
         "Construct 3",
