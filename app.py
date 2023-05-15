@@ -23,7 +23,9 @@ st.set_page_config(
 # CSS Style
 with open("style.css") as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
-
+    # Function to display widgets and generate class outline
+    def display_widgets() -> tuple:
+        st.image("img/lblChoose.png")
 # NamedTuple for ChatResponse
 class ChatResponse(NamedTuple):
     content: str
@@ -49,9 +51,7 @@ def get_cached_code_info(app: str, difficulty: str, unique_id: float) -> str:
 def display_header(app: str) -> None:
     # ... logo_dict and st.image as in your original code ...
 
-# Function to display widgets and generate class outline
-    def display_widgets() -> tuple:
-        st.image("img/lblChoose.png")
+
 
     options = [
         "Blender",
