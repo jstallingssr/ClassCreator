@@ -3,13 +3,9 @@ from functools import partial
 import openai
 import streamlit as st
 from time import time
-from dotenv import load_dotenv
-import os
+from keys import API_KEY
 
-load_dotenv()
-
-openai.api_key =  os.getenv('API_KEY')
-
+openai.api_key = API_KEY
 
 class ChatResponse(NamedTuple):
     content: str
