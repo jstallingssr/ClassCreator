@@ -5,6 +5,9 @@ import streamlit as st
 from time import time
 import os
 
+st.set_page_config(page_title="Yipee", page_icon=None, layout="centered", initial_sidebar_state="auto", menu_items=None)
+
+
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 class ChatResponse(NamedTuple):
