@@ -17,7 +17,16 @@ st.set_page_config(
     }
 )
 openai.api_key = st.secrets["OPENAI_API_KEY"]
+col1, col2, col3 = st.beta_columns([1,6,1])
 
+with col1:
+            st.write("")
+
+with col2:
+            st.image("img/logo.png")
+
+with col3:
+            st.write("")
 with open("style.css") as f:
     st.markdown('<style>{}</style>'.format(f.read()), unsafe_allow_html=True)
 
@@ -90,26 +99,17 @@ def display_header(app: str) -> None:
         st.write("")
 
 
-    def display_widgets() -> tuple:
-        col1, col2, col3 = st.beta_columns([1,6,1])
-
-    with col1:
-        st.write("")
-
-    with col2:
-        st.image("img/logo.png")
-
-    with col3:
-        st.write("")
+def display_widgets() -> tuple:
 
 
-st.markdown("The Class Creator Thing-a-ma-jig! is an innovative educational tool that leverages artificial intelligence to create lesson plans for a wide array of software applications. Choose from an expertly curated list of programs, including Blender, Unreal Engine, Unity, and more.")
 
-f"Our application is designed with your schedule in mind. Each class can be comfortably completed within a 45-60 minute time frame, and the difficulty level can be customized to match your skill, ranging from Beginner to Expert."
+    st.markdown("The Class Creator Thing-a-ma-jig! is an innovative educational tool that leverages artificial intelligence to create lesson plans for a wide array of software applications. Choose from an expertly curated list of programs, including Blender, Unreal Engine, Unity, and more.")
 
-f"Create unique and comprehensive class outlines with just a few clicks using the Class Creator Thing-a-ma-jig!)"
+    f"Our application is designed with your schedule in mind. Each class can be comfortably completed within a 45-60 minute time frame, and the difficulty level can be customized to match your skill, ranging from Beginner to Expert."
 
-st.subheader("First, choose a software application from the list below:")
+    f"Create unique and comprehensive class outlines with just a few clicks using the Class Creator Thing-a-ma-jig!)"
+
+    st.subheader("First, choose a software application from the list below:")
 response = st.empty()
 options = [
     "Blender",
