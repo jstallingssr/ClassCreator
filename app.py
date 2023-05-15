@@ -60,6 +60,7 @@ def display_header(app: str) -> None:
         "Roblox",
         "Godot",
         "Ableton Live",
+        "Godot",
         "BandLab",
         "Unity",
         "Construct 3",
@@ -86,7 +87,9 @@ def display_header(app: str) -> None:
             )
             st.markdown(f"**Class Outline:**\n{class_outline}")
 
-    return class_outline, app, difficulty
+        return class_outline, app, difficulty
+
+    return None, None, None  # Return None values if button is not pressed
 
 # Main function
 def main() -> None:
@@ -112,7 +115,6 @@ def main() -> None:
             # If "New Class" is clicked, clear the cache and stop the app
             st.caching.clear_cache()
             st.experimental_rerun()
-
 
 if __name__ == "__main__":
     main()
