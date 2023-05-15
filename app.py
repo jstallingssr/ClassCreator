@@ -5,7 +5,7 @@ import streamlit as st
 from time import time
 import os
 
-open.ai_key = st.secrets["OPENAI_API_KEY"]
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 st.set_page_config(
     page_title="Class Creator Thing-a-ma-jig!",
