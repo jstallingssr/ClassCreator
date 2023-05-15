@@ -22,16 +22,7 @@ st.set_page_config(
 with open("style.css") as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
 
-col1, col2, col3 = st.columns([1, 6, 1])
-
-with col1:
-    st.write("")
-
-with col2:
     st.image("img/logo.png")
-
-with col3:
-    st.write("")
 
 
 class ChatResponse(NamedTuple):
