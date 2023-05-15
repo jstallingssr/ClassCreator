@@ -126,7 +126,7 @@ def display_widgets() -> tuple:
 
 
 def main() -> None:
-    display_header()
+    # display_header()  # <- remove this line
     class_outline, app, difficulty, generate_class = display_widgets()
     new_class_clicked = (
         False  # Variable to track whether "New Class" button was clicked
