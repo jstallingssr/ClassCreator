@@ -88,8 +88,8 @@ def display_header(app: str) -> None:
             st.markdown(f"**Class Outline:**\n{class_outline}")
 
         return class_outline, app, difficulty
-
     return None, None, None  # Return None values if button is not pressed
+
 
 # Main function
 def main() -> None:
