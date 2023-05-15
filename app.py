@@ -115,6 +115,14 @@ def display_header(app: str) -> None:
         st.image(logo_file_path)
 
 def display_widgets() -> tuple:
+
+
+    st.markdown("The Class Creator Thing-a-ma-jig! is an innovative educational tool that leverages artificial intelligence to create lesson plans for a wide array of software applications. Choose from an expertly curated list of programs, including Blender, Unreal Engine, Unity, and more.")
+
+    f"Our application is designed with your schedule in mind. Each class can be comfortably completed within a 45-60 minute time frame, and the difficulty level can be customized to match your skill, ranging from Beginner to Expert."
+
+    f"Create unique and comprehensive class outlines with just a few clicks using the Class Creator Thing-a-ma-jig!)"
+
     st.subheader("First, choose a software application from the list below:")
     response = st.empty()
     options = [
