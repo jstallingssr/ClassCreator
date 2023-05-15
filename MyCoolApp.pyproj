@@ -27,6 +27,7 @@
     <Compile Include="text_to_speech.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".env" />
     <Content Include="requirements.txt" />
     <Content Include="style.css" />
   </ItemGroup>

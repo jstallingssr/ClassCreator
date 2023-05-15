@@ -1,12 +1,14 @@
 from typing import NamedTuple
 from functools import partial
-import os
 import openai
 import streamlit as st
 from time import time
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
 
-openai.api_key = "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"
+openai.api_key =  os.getenv('API_KEY')
 
 
 class ChatResponse(NamedTuple):
