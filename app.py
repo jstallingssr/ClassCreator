@@ -87,6 +87,7 @@ def display_header(app: str) -> None:
         "Roblox": "img/roblox.png",
         "Godot": "img/godot.png",
         "Microsoft Excel": "img/excel.png",
+        "Minecraft": "img/minecraft.png",
         "Ableton Live": "img/ableton.png"
         # ... add the rest of your mappings here
     }
@@ -95,16 +96,8 @@ def display_header(app: str) -> None:
         app, "img/logo.png"
     )  # Use a default logo if the app is not found.
 
-    col1, col2, col3 = st.columns([1, 6, 1])
+    st.image(logo_file_path)
 
-    with col1:
-        st.write("")
-
-    with col2:
-        st.image(logo_file_path)
-
-    with col3:
-        st.write("")
 
 
 def display_widgets() -> tuple:
@@ -148,7 +141,6 @@ def display_widgets() -> tuple:
             st.button("New Class")
 
     return class_outline, app, difficulty
-
 
 def main() -> None:
     st.markdown(
