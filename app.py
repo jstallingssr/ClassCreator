@@ -85,7 +85,8 @@ def display_header(app: str) -> None:
         "Blender": "img/blender.png",
         "Unreal Engine": "img/unreal.png",
         "Roblox": "img/roblox.png",
-        "Godot": "img/godot.png"
+        "Godot": "img/godot.png",
+        "Microsoft Excel": "img/excel.png"
         # ... add the rest of your mappings here
     }
 
@@ -138,7 +139,7 @@ def display_widgets() -> tuple:
 
     if st.button("Generate a Class!"):
         unique_id = time()  # Generate a new unique identifier
-        with st.spinner(text="Creating class, hang tight!"):
+        with st.spinner(text="Creating class, hang tight! This can take up to 30 seconds."):
             class_outline = get_cached_code_info(
                 app=app, difficulty=difficulty, unique_id=unique_id
             )
