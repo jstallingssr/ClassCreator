@@ -72,6 +72,20 @@ def get_cached_code_info(app: str, difficulty: str, unique_id: float) -> str:
  #   st.image("img/logo.png")
 
 def display_header(app: str) -> None:
+
+    col1, col2, col3 = st.beta_columns([1,6,1])
+
+    with col1:
+        st.write("")
+
+    with col2:
+        st.image("img/logo.png"))
+
+    with col3:
+        st.write("")
+
+
+
     # Define a dictionary mapping app names to logo file paths.
         logo_dict = {
         'Blender': 'img/blender.png',
