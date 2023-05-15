@@ -98,6 +98,20 @@ def display_header(app: str) -> None:
         logo_file_path = logo_dict.get(app, 'img/logo.png')  # Use a default logo if the app is not found.
 
     # Display the logo.
+
+        col1, col2, col3 = st.beta_columns([1,6,1])
+
+    with col1:
+        st.write("")
+
+    with col2:
+        st.image(logo_file_path)
+
+    with col3:
+        st.write("")
+
+
+
         st.image(logo_file_path)
 
 def display_widgets() -> tuple:
