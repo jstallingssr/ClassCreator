@@ -135,7 +135,7 @@ def display_widgets() -> tuple:
 
 def main() -> None:
     st.markdown(
-        "The <b>Class Creator Thing-a-ma-jig!,</b> is an innovative educational tool that leverages artificial intelligence to create lesson plans for a wide array of software applications. Choose from a curated list of programs, including Blender, Unreal Engine, Unity, and more."
+        "The <pre><b>Class Creator Thing-a-ma-jig!</b></pre> is an innovative educational tool that leverages artificial intelligence to create lesson plans for a wide array of software applications. Choose from a curated list of programs, including Blender, Unreal Engine, Unity, and more."
     )
 
     f"Each class can be comfortably completed within a 45-60 minute time frame, and the difficulty level can be customized to match your student's skill, ranging from Beginner to Expert."
