@@ -3,7 +3,6 @@ from functools import partial
 import openai
 import streamlit as st
 from time import time
-import os
 
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
@@ -11,12 +10,7 @@ st.set_page_config(
     page_title="Class Creator Thing-a-ma-jig!",
     page_icon="🧊",
     layout="centered",
-    initial_sidebar_state="expanded",
-    menu_items={
-        "Get Help": "https://www.extremelycoolapp.com/help",
-        "Report a bug": "https://www.extremelycoolapp.com/bug",
-        "About": "# This is a header. This is an *extremely* cool app!",
-    },
+
 )
 
 with open("style.css") as f:
@@ -62,14 +56,11 @@ def send_app(app: str, difficulty: str) -> ChatResponse:
 def retrieve_ai_answer(app: str, difficulty: str) -> str:
     return send_app(app, difficulty).content.strip()
 
-
 get_code_info = partial(retrieve_ai_answer)
-
 
 @st.cache_data(show_spinner=False)
 def get_cached_code_info(app: str, difficulty: str, unique_id: float) -> str:
     return get_code_info(app=app, difficulty=difficulty)
-
 
 def display_header(app: str) -> None:
     logo_dict = {
@@ -88,8 +79,6 @@ def display_header(app: str) -> None:
     )  # Use a default logo if the app is not found.
 
     st.image(logo_file_path)
-
-
 
 def display_widgets() -> tuple:
     st.subheader("First, choose a software application from the list below:")
@@ -154,7 +143,5 @@ def main() -> None:
         if new_class_clicked:
             st.stop()
 
-
-            if __name__ == "__main__":
+if __name__ == "__main__":
                 main()
-
