@@ -24,7 +24,20 @@ class ChatResponse(NamedTuple):
 
 def send_app(app: str, difficulty: str) -> ChatResponse:
     prompt = (
-        # existing code ...
+        f"I would like a lesson plan for {app} at the {difficulty} level. "
+        f"These are educational classes, where students will learn a skill using the selected app. "
+        f"This should be a very specific feature in the software, not a general overview. "
+        f"Each class should be able to be completed within 45-60 minutes."
+        f"Please provide only one class outline with a catchy title shown at the top. "
+        f"The outline should be formatted in markdown, outline format. "
+        f"The outline should be very detailed, up to three levels deep. "
+        f"Each class should include three to five specific items that the student will create and deliver "
+        f"or deliver during class (a game feature, an art asset, a texture, etc.). "
+        f"Do not repeat any suggested classes during a user's session."
+        f"Each outline should also have an additional resource section at the bottom with relevant links"
+        f"When providing additional resources, please only use OFFICIAL resources such as https://docs.blender.org/ "
+        f"https://docs.unrealengine.com/ do not link to videos or fan sites"
+        f"No mention should be made of time, how long to complete, etc."
     )
 
     response = openai.Completion.create(
@@ -94,7 +107,7 @@ def display_widgets() -> tuple:
 
     if st.button("Generate a Class!"):
         unique_id = time()  # Generate a new unique identifier
-        with st.spinner(text="Creating a class, hang tight! This can take up to 30 seconds..."):
+        with st.spinner(text="Building your class, hang tight! This can take up to 30 seconds..."):
             class_outline = get_cached_code_info(
                 app=app, difficulty=difficulty, unique_id=unique_id
             )
