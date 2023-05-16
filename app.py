@@ -20,20 +20,14 @@ st.set_page_config(
     },
 )
 
-# CSS Style
-with open("style.css") as f:
-    st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
-    # Function to display widgets and generate class outline
-    def display_widgets() -> tuple:
-        st.image("img/lblChoose.png")
 # NamedTuple for ChatResponse
 class ChatResponse(NamedTuple):
     content: str
 
 # Function to send a request to the OpenAI API
 def send_app(app: str, difficulty: str) -> ChatResponse:
-    # ... prompt definition and openai.Completion.create as in your original code ...
-
+    prompt = f"Generate a class outline for {app} at {difficulty} level."  # Update this as per your needs
+    response = openai.Completion.create(engine="text-davinci-003", prompt=prompt, max_tokens=150)
     return ChatResponse(response.choices[0].text.strip())
 
 # Function to retrieve AI answer
@@ -47,11 +41,13 @@ get_code_info = partial(retrieve_ai_answer)
 def get_cached_code_info(app: str, difficulty: str, unique_id: float) -> str:
     return get_code_info(app=app, difficulty=difficulty)
 
-# Function to display the logo of the selected app
-def display_header(app: str) -> None:
-    # ... logo_dict and st.image as in your original code ...
+# CSS Style
+with open("style.css") as f:
+    st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
 
-
+# Function to display widgets and generate class outline
+def display_widgets() -> tuple:
+    st.image("img/lblChoose.png")
 
     options = [
         "Blender",
@@ -68,8 +64,8 @@ def display_header(app: str) -> None:
         "Krita",
     ]
     app = st.selectbox("Select:", options)
-
-    display_header(app)
+    # Uncomment the line below if you have a function to display header
+    # display_header(app)
 
     st.image("img/Diff.png")
     difficulty = st.select_slider(
@@ -89,7 +85,6 @@ def display_header(app: str) -> None:
 
         return class_outline, app, difficulty
     return None, None, None  # Return None values if button is not pressed
-
 
 # Main function
 def main() -> None:
@@ -118,3 +113,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
