@@ -109,7 +109,7 @@ def main() -> None:
         if st.button("New Class"):
             # If "New Class" is clicked, clear the cache and stop the app
             st.caching.clear_cache()
-            st.experimental_rerun()
+            #st.experimental_rerun()
 
 if __name__ == "__main__":
     main()
