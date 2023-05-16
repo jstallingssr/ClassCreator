@@ -100,7 +100,7 @@ def display_widgets() -> tuple:
     selected_option = st.selectbox("Select:", options)
     app = selected_option
 
-    display_header(app)
+    display_header(app)  # Add this line to display the app logo
 
     st.subheader("Next, select the level of difficulty for this class:")
     difficulty = st.select_slider(
